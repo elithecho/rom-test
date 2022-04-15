@@ -3,6 +3,7 @@ module App
     class Users < ROM::Relation[:sql]
       # This gets all
       schema(:users, infer: true) do
+        use :timestamps
         associations do
           has_many :tasks
         end

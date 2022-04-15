@@ -3,6 +3,10 @@ Application.register_provider(:persistence) do
     config = target["db"]
     config.auto_registration(target.root + "lib/app")
 
-    register("container", ROM.container(target["db"]))
+    container = ROM.container(target["db"]) do |config|
+      config.gateways[:default].use_logger(Logger.new($stdout))
+    end
+
+    register("container", container)
   end
 end
